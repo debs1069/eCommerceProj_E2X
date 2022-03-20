@@ -40,8 +40,7 @@ public class MyStepdefs implements En {
 
             List<WebElement> slideImageList = landingPage.headerTitleList();
 
-
-            if (headerText.equals("CORNERSTONE DEMO") && slideImageList.size() > 0) {
+            if (headerText.equals("CORNERSTONE DEMO") && (slideImageList.size() > 0)) {
                 System.out.println("Successfully logged in the shopping site");
                 Assert.assertEquals("Successfully logged in the shopping site", true, true);
             } else {
@@ -139,9 +138,9 @@ public class MyStepdefs implements En {
             try {
                 //get confirmation page message text
                 landingPage.purchaseConfirmationValidation();
+                String confirmationMsgText = landingPage.purchaseConfirmationValidation();
 
                 //Assert if Confirmation message appears on purchase confirmation page on successfull placement of order
-                String confirmationMsgText = landingPage.purchaseConfirmationValidation();
                 if (confirmationMsgText.contains("Thank you")) {
                     Assert.assertEquals("successfully presented with a purchase confirmation page", true, true);
                     System.out.println("successfully presented with a purchase confirmation page with " + confirmationMsgText + " msg");
