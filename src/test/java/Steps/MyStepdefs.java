@@ -114,8 +114,8 @@ public class MyStepdefs implements En {
                 String expiryDate = utils.prop.getProperty("expiryDate");
                 String nameOnCard = utils.prop.getProperty("nameOnCard");
 
-                //place order:
-                landingPage.placeOrder(creditCardnum, ccv, expiryDate, nameOnCard);
+
+                utils.waitTillObjectClickable(landingPage.placeOrderBtn);
 
                 //Assert place order button present after checkout done successfully and all details filled
                 boolean placeOrderPresent = landingPage.placeOrderBtn.isDisplayed();
@@ -127,6 +127,8 @@ public class MyStepdefs implements En {
                     Assert.assertEquals("Checkout process not successfull", true, false);
                 }
 
+                //place order:
+                landingPage.placeOrder(creditCardnum, ccv, expiryDate, nameOnCard);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
