@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.Set;
 
-public class LandingPage {
+public class All_pageobjects {
     UI_utils utils;
     WebDriver driver;
 
@@ -91,7 +91,7 @@ public class LandingPage {
 
 
 
-    public LandingPage(WebDriver driver, UI_utils utils) {
+    public All_pageobjects(WebDriver driver, UI_utils utils) {
         this.utils = utils;
         this.driver = driver;
         PageFactory.initElements(driver, this);
