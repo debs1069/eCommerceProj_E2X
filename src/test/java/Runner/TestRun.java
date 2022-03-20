@@ -16,4 +16,4 @@ import cucumber.api.junit.Cucumber;
 
 //inside the Destination folder, in the target folder of the maven project.
 
-public class testRun { }
+public class TestRun { }
