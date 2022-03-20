@@ -20,8 +20,10 @@ public class MyStepdefs implements En {
 
     public MyStepdefs(UI_utils utils) throws IOException {
         this.utils = utils;
+
         //to invoke browser:
         driver = utils.initializeDriver();
+
         LandingPage landingPage = new LandingPage(driver, utils);
 
         Given("^: I have logged in the shopping site$", () -> {
@@ -36,16 +38,15 @@ public class MyStepdefs implements En {
             //Assert if header text and slide image present in the shopping page once successfully logged in
             String headerText = landingPage.headerText.getText();
 
-            List<WebElement> slideImageList=landingPage.headerTitleList();
+            List<WebElement> slideImageList = landingPage.headerTitleList();
 
 
-            if(headerText.equals("CORNERSTONE DEMO")&& slideImageList.size()>0){
+            if (headerText.equals("CORNERSTONE DEMO") && slideImageList.size() > 0) {
                 System.out.println("Successfully logged in the shopping site");
-                Assert.assertEquals("Successfully logged in the shopping site",true,true);
-            }
-            else{
+                Assert.assertEquals("Successfully logged in the shopping site", true, true);
+            } else {
                 System.out.println("Not logged in the shopping site");
-                Assert.assertEquals("Not logged in the shopping site",true,false);
+                Assert.assertEquals("Not logged in the shopping site", true, false);
             }
 
             driver.manage().window().maximize();
@@ -53,26 +54,22 @@ public class MyStepdefs implements En {
         });
 
         And("^: I have searched for products$", () -> {
+
             //searches for the product and validates product present or not
-
-
             try {
 
                 landingPage.searchProduct(utils.prop.getProperty("searchtext"));
 
                 //Assert if searched product image appears after successfully searching product
-                boolean productSearched=landingPage.brushImg.isDisplayed();
-                if(productSearched==true){
+                boolean productSearched = landingPage.brushImg.isDisplayed();
+                if (productSearched == true) {
                     System.out.println("Successfully searches for the product");
-                    Assert.assertEquals("Successfully searches for the product",true,true);
-                }
-                else{
+                    Assert.assertEquals("Successfully searches for the product", true, true);
+                } else {
                     System.out.println("Product not searched");
-                    Assert.assertEquals("Product not searched",true,false);
+                    Assert.assertEquals("Product not searched", true, false);
                 }
-                }
-
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
@@ -85,21 +82,22 @@ public class MyStepdefs implements En {
             landingPage.addProductToCart();
 
             //Assert checkout button present after product successfully added to cart
-            boolean checkOutButtonPresent=landingPage.checkoutButton.isDisplayed();
-            if(checkOutButtonPresent==true){
+            boolean checkOutButtonPresent = landingPage.checkoutButton.isDisplayed();
+            if (checkOutButtonPresent == true) {
                 System.out.println("Successfully added product to cart");
-                Assert.assertEquals("Successfully added product to cart",true,true);
-            }
-            else{
+                Assert.assertEquals("Successfully added product to cart", true, true);
+            } else {
                 System.out.println("Product not added to cart");
-                Assert.assertEquals("Product not added to cart",true,false);
+                Assert.assertEquals("Product not added to cart", true, false);
             }
 
         });
         When("^: I complete the checkout process$", () -> {
             //complete checkout process
             try {
+                //checkout:
                 landingPage.checkout();
+                //fill details:
                 landingPage.fillDetails(utils.prop.getProperty("email"));
 
                 String FirstName = utils.prop.getProperty("FirstName");
@@ -109,6 +107,7 @@ public class MyStepdefs implements En {
                 String PostalCode = utils.prop.getProperty("PostalCode");
                 String PhoneNumber = utils.prop.getProperty("PhoneNumber");
 
+                //fill shipping details:
                 landingPage.fillShippingDetails(FirstName, LastName, Address, City, PostalCode, PhoneNumber);
 
                 String creditCardnum = utils.prop.getProperty("creditCardnumber");
@@ -116,17 +115,17 @@ public class MyStepdefs implements En {
                 String expiryDate = utils.prop.getProperty("expiryDate");
                 String nameOnCard = utils.prop.getProperty("nameOnCard");
 
+                //place order:
                 landingPage.placeOrder(creditCardnum, ccv, expiryDate, nameOnCard);
 
                 //Assert place order button present after checkout done successfully and all details filled
-                boolean placeOrderPresent=landingPage.placeOrderBtn.isDisplayed();
-                if(placeOrderPresent==true){
+                boolean placeOrderPresent = landingPage.placeOrderBtn.isDisplayed();
+                if (placeOrderPresent == true) {
                     System.out.println("Successfully completed checkout process");
-                    Assert.assertEquals("Successfully completed checkout process",true,true);
-                }
-                else{
+                    Assert.assertEquals("Successfully completed checkout process", true, true);
+                } else {
                     System.out.println("Checkout process not successfull");
-                    Assert.assertEquals("Checkout process not successfull",true,false);
+                    Assert.assertEquals("Checkout process not successfull", true, false);
                 }
 
 
@@ -142,20 +141,20 @@ public class MyStepdefs implements En {
                 landingPage.purchaseConfirmationValidation();
 
                 //Assert if Confirmation message appears on purchase confirmation page on successfull placement of order
-                String confirmationMsgText=landingPage.purchaseConfirmationValidation();
+                String confirmationMsgText = landingPage.purchaseConfirmationValidation();
                 if (confirmationMsgText.contains("Thank you")) {
                     Assert.assertEquals("successfully presented with a purchase confirmation page", true, true);
                     System.out.println("successfully presented with a purchase confirmation page with " + confirmationMsgText + " msg");
-                }else{
+                } else {
                     System.out.println("Not presented with a purchase confirmation page");
-                    Assert.assertEquals("Not presented with a purchase confirmation page",true,false);
+                    Assert.assertEquals("Not presented with a purchase confirmation page", true, false);
                 }
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             driver.quit();
-        } );
+        });
 
 
     }
