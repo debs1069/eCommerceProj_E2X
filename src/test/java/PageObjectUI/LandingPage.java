@@ -13,7 +13,6 @@ import java.util.Set;
 public class LandingPage {
     UI_utils utils;
     WebDriver driver;
-    private static long TIMEOUT_S = 35;
 
     @FindBy(xpath = "//button[@id='quick-search-expand']")
     public WebElement searchButton;
@@ -38,8 +37,6 @@ public class LandingPage {
 
     @FindBy(xpath = "//button[@id='checkout-customer-continue']")
     public WebElement continueAsGuestBtn;
-
-    //By searchButton=By.xpath("//button[@id='quick-search-expand']");
 
     @FindBy(xpath = "//a[@id='checkout-guest-continue']")
     public WebElement continueAsGuestBtnNextPg;
@@ -106,8 +103,6 @@ public class LandingPage {
 
             searchButton.click();
 
-            //utils.ClickElement(searchButton);
-
             searchBox.sendKeys(searchtext);
             utils.waitTillObjectAppears(brushImg);
 
@@ -161,23 +156,19 @@ public class LandingPage {
 
         }
 
-
         utils.waitTillObjectAppears(mail);
-        //new Actions(driver).moveToElement(checkbox).perform();
-        //utils.ClickElement((checkbox));
-        //utils.ClickElement((checkbox));
-        //new Actions(driver).moveToElement(mail).perform();
+
         mail.sendKeys(email);
         mail.sendKeys(email);
         utils.ClickElement((checkbox));
-        //utils.ClickElement((checkbox));
+
         continueAsGuestBtn.click();
         utils.waitTillObjectAppears(continueAsGuestBtnNextPg);
         utils.ClickElement(continueAsGuestBtnNextPg);
     }
 
     public void fillShippingDetails(String firstName, String lastName, String address, String city, String postalCode, String phoneNumber) throws InterruptedException {
-        //Thread.sleep(1000);
+
         utils.waitTillObjectAppears(firstname);
         try {
             if (firstname.isDisplayed()) {
@@ -232,7 +223,7 @@ public class LandingPage {
     public void placeOrder(String cardNum, String ccv, String expiryDate, String creditCardname) {
         utils.waitTillObjectAppears(creditCardNo);
         try {
-            //utils.waitTillObjectAppears(creditCardNo);
+
             if (creditCardNo.isDisplayed()) {
                 creditCardNo.sendKeys(cardNum);
                 expDate.sendKeys(expiryDate);
@@ -243,7 +234,7 @@ public class LandingPage {
                 System.out.println("loading purchase page");
                 utils.waitTillObjectAppears(creditCardNo);
                 try {
-                    //utils.waitTillObjectAppears(creditCardNo);
+
                     if (creditCardNo.isDisplayed()) {
                         creditCardNo.sendKeys(cardNum);
                         expDate.sendKeys(expiryDate);
@@ -266,7 +257,6 @@ public class LandingPage {
 
         utils.waitTillObjectAppears(confirmationMsg);
         String confirmationText = confirmationMsg.getText().split("!")[0].toString();
-        //System.out.println(confirmationText);
 
 
         return confirmationText;
