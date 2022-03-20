@@ -2,7 +2,7 @@ Feature: demo for bigcommerce shopping site
 
   Scenario:purchase order
 
-    Given : I have logged in the shopping site
+    Given : I have opened the shopping site
 
     And : I have searched for products
 

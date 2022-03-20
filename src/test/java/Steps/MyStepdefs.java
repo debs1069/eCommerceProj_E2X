@@ -26,7 +26,7 @@ public class MyStepdefs implements En {
 
         LandingPage landingPage = new LandingPage(driver, utils);
 
-        Given("^: I have logged in the shopping site$", () -> {
+        Given("^: I have opened the shopping site$", () -> {
 
 
             String urlName = utils.prop.getProperty("url");
@@ -35,7 +35,7 @@ public class MyStepdefs implements En {
             //open the shopping site page
             driver.get(urlName);
 
-            //Assert if header text and slide image present in the shopping page once successfully logged in
+            //Assert if header text and slide image present in the shopping page once successfully opened the web pg
             String headerText = landingPage.headerText.getText();
 
             List<WebElement> slideImageList = landingPage.headerTitleList();
@@ -59,7 +59,7 @@ public class MyStepdefs implements En {
 
                 landingPage.searchProduct(utils.prop.getProperty("searchtext"));
 
-                //Assert if searched product image appears after successfully searching product
+                //Assert if searched product appears after successfully searching product
                 boolean productSearched = landingPage.brushImg.isDisplayed();
                 if (productSearched == true) {
                     System.out.println("Successfully searches for the product");
@@ -80,7 +80,7 @@ public class MyStepdefs implements En {
 
             landingPage.addProductToCart();
 
-            //Assert checkout button present after product successfully added to cart
+            //Assert 'checkout' button present after product successfully added to cart
             boolean checkOutButtonPresent = landingPage.checkoutButton.isDisplayed();
             if (checkOutButtonPresent == true) {
                 System.out.println("Successfully added product to cart");
@@ -117,7 +117,7 @@ public class MyStepdefs implements En {
 
                 utils.waitTillObjectClickable(landingPage.placeOrderBtn);
 
-                //Assert place order button present after checkout done successfully and all details filled
+                //Assert 'place order' button present after checkout done successfully and all details filled
                 boolean placeOrderPresent = landingPage.placeOrderBtn.isDisplayed();
                 if (placeOrderPresent == true) {
                     System.out.println("Successfully completed checkout process");
